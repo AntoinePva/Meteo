@@ -3,6 +3,9 @@ package izi.meteo.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +14,17 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import izi.meteo.R;
+import izi.meteo.Recycler.SimpleAdapter;
 import izi.meteo.SplashScreen;
 
 /**
  * Created by Antoine on 03/02/2015.
  */
 public class PageFragment extends Fragment {
-    @InjectView(R.id.displayCityInfo)
-    TextView tv_city;
-
+//    @InjectView(R.id.displayCityInfo)
+//    TextView tv_city;
+   @InjectView(R.id.recycler_view)
+   RecyclerView mRecyclerView;
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 
@@ -35,7 +40,7 @@ public class PageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
-
+        mRecyclerView = (RecyclerView)getActivity().findViewById(R.id.recycler_view);
     }
 
     // Inflate the fragment layout we defined above for this fragment
@@ -48,8 +53,17 @@ public class PageFragment extends Fragment {
 
         switch (mPage) {
             case 1:
+
+
                 ButterKnife.inject(this,viewMeteo);
-                tv_city.setText(SplashScreen.CURRENT_TOWN);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setHasFixedSize(true);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                RecyclerView.Adapter mAdapter;
+                mAdapter = new SimpleAdapter();
+                mRecyclerView.setAdapter(mAdapter);
+
+//                tv_city.setText(SplashScreen.CURRENT_TOWN);
                 return viewMeteo;
             case 2:
 
