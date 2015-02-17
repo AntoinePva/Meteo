@@ -25,6 +25,9 @@ public class DataModel {
         this.weatherDescription = weatherDescription;
     }
 
+    public DataModel() {
+    }
+
     public DataModel(String name) { this.name = name; }
 
 

@@ -1,16 +1,14 @@
 package izi.meteo.Recycler;
 
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import izi.meteo.Data.DataController;
 import izi.meteo.Data.DataModel;
 import izi.meteo.R;
 
@@ -19,12 +17,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
  
     public CardAdapter() {
         super();
-        mItems = new ArrayList<DataModel>();
-//        Movie movie = new Movie();
-//        movie.setName("The Amazing Spider-Man 2");
-//        movie.setThumbnail(R.drawable.spiderman);
-//        mItems.add(movie);
- 
+
+       mItems = DataController.listLocation;
 
     }
  
@@ -38,9 +32,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
  
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Movie movie = mItems.get(i);
-//        viewHolder.tvMovie.setText(movie.getName());
-//        viewHolder.imgThumbnail.setImageResource(movie.getThumbnail());
+        DataModel mD = mItems.get(i);
+        viewHolder.tvMovie.setText(mD.getName());
+//        viewHolder.imgThumbnail.setImageResource(mD.getId());
     }
  
     @Override
@@ -49,14 +43,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
     }
  
     class ViewHolder extends RecyclerView.ViewHolder{
- 
-        public ImageView imgThumbnail;
         public TextView tvMovie;
  
         public ViewHolder(View itemView) {
             super(itemView);
-            imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
-            tvMovie = (TextView)itemView.findViewById(R.id.tv_movie);
+
+            tvMovie = (TextView)itemView.findViewById(R.id.displayCityInfo);
         }
     }
 }
