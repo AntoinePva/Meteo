@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Meteo</string>
+    <string name="slogan">La métété...la mété-o</string>
+    <string name="search_title">Cherchez une ville</string>
+    <string name="retry">Réessayer</string>
+    <string name="noConnexion">Vous devez activer vos données mobiles et votre Gps</string>
+</resources>
+
