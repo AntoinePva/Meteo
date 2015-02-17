@@ -13,10 +13,11 @@ import java.net.URL;
 /**
  * Created by Antoine on 04/02/2015.
  */
-public class DataAsync extends AsyncTask<DataModel, Void, DataModel> {
+public class DataAsync extends AsyncTask<String, Void, String>{
 
     private Context mContext;
-    private static String url = "http://api.openweathermap.org/data/2.5/weather?q=";
+    private final String url = "http://api.openweathermap.org/data/2.5/weather?q=";
+    private final String filter = "&lang=fr&units=metric";
 
     @Override
     protected void onPreExecute() {
@@ -25,16 +26,24 @@ public class DataAsync extends AsyncTask<DataModel, Void, DataModel> {
     }
 
     @Override
-    protected DataModel doInBackground(DataModel... params) {
-        Log.e("doInBackground",this.getWeatherData(params[0].getName()));
-        DataModel newModel = new DataModel(params[0].getName());
-        return newModel;
+    protected String doInBackground(String... params) {
+
+        if(params[1].equals(Option.FIND.toString())){
+            Log.e("doInBackground","find");
+            return this.getWeatherData(params[0]);
+
+        }else if(params[1].equals(Option.SEARCH.toString())){
+            Log.e("doInBackground","search");
+
+        }
+
+        return null;
     }
 
     @Override
-    protected void onPostExecute(DataModel newModel) {
-        super.onPostExecute(newModel);
-        Log.e("postExecute",newModel.getName());
+    protected void onPostExecute(String data) {
+        super.onPostExecute(data);
+        Log.e("postExecute","finish");
     }
 
     @Override
@@ -43,12 +52,12 @@ public class DataAsync extends AsyncTask<DataModel, Void, DataModel> {
         Log.e("onProgressUpdate","progress");
     }
 
-    public String getWeatherData(String location) {
+    private String getWeatherData(String location) {
         HttpURLConnection con = null ;
         InputStream is = null;
 
         try {
-            con = (HttpURLConnection) ( new URL(this.url + location)).openConnection();
+            con = (HttpURLConnection) ( new URL(this.url + location + this.filter)).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
             con.setDoOutput(true);
@@ -76,4 +85,8 @@ public class DataAsync extends AsyncTask<DataModel, Void, DataModel> {
         return null;
 
     }
+
+
 }
+
+
