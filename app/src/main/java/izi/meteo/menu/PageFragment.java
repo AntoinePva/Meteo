@@ -17,7 +17,7 @@ import izi.meteo.SplashScreen;
  * Created by Antoine on 03/02/2015.
  */
 public class PageFragment extends Fragment {
-    @InjectView(R.id.displayCiyInfo)
+    @InjectView(R.id.displayCityInfo)
     TextView tv_city;
 
     public static final String ARG_PAGE = "ARG_PAGE";
@@ -49,7 +49,7 @@ public class PageFragment extends Fragment {
         switch (mPage) {
             case 1:
                 ButterKnife.inject(this,viewMeteo);
-
+                tv_city.setText(SplashScreen.CURRENT_TOWN);
                 return viewMeteo;
             case 2:
 

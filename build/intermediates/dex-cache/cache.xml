@@ -44,6 +44,13 @@
         <dex dex="D:\Documents\GitHub\app\build\intermediates\pre-dexed\debug\classes-4b9e1f0109eea114951585ce2bf6ba7531460600.jar" />
     </item>
     <item
+        jar="D:\Documents\GitHub\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\Documents\GitHub\app\build\intermediates\pre-dexed\debug\classes-a80b799b63f020046b964053aa79bbe1008d1820.jar" />
+    </item>
+    <item
         jar="C:\Users\Antoine\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\5.1.2\daf5472b0df6dabaceb6ad755b3812535863965a\butterknife-5.1.2.jar"
         jumboMode="false"
         revision="21.1.2"

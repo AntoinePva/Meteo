@@ -2,6 +2,7 @@ package izi.meteo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -45,16 +46,9 @@ public class SplashScreen extends Activity implements LocationListener {
         Criteria mCriteria = new Criteria();
         mProvider = mGps.getBestProvider(mCriteria, false);
         mCriteria.setSpeedRequired(true);
-        if(checkDataNetwork()){
-            mGps.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            mGps.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-        }else if(mGps.isProviderEnabled(mProvider)){
-            mGps.getLastKnownLocation(mProvider);
-            mGps.requestLocationUpdates(mProvider, 0, 0, this);
-        }
 
 
-        viewUpdate(tv_noProvider,pb_location);
+        viewUpdate(tv_noProvider, pb_location);
     }
 
     @Override
@@ -77,11 +71,16 @@ public class SplashScreen extends Activity implements LocationListener {
     }
 
     private void viewUpdate(TextView tv_noProvider, ProgressBar pb_location) {
-
         if (mGps.isProviderEnabled(mProvider) || checkDataNetwork()) {
+            if (checkDataNetwork()) {
+                mGps.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                mGps.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            } else if (mGps.isProviderEnabled(mProvider)) {
+                mGps.getLastKnownLocation(mProvider);
+                mGps.requestLocationUpdates(mProvider, 0, 0, this);
+            }
             tv_noProvider.setVisibility(View.GONE);
             pb_location.setVisibility(View.VISIBLE);
-
         } else {
             tv_noProvider.setVisibility(View.VISIBLE);
             pb_location.setVisibility(View.GONE);
@@ -107,7 +106,7 @@ public class SplashScreen extends Activity implements LocationListener {
             if (addresses.size() > 0)
 //                  Return current city
                 CURRENT_TOWN = addresses.get(0).getLocality();
-            Log.e("VILLE",CURRENT_TOWN);
+            Log.e("VILLE", CURRENT_TOWN);
         } catch (Exception e) {
 
         }
@@ -118,9 +117,10 @@ public class SplashScreen extends Activity implements LocationListener {
         if (location != null) {
             getTown(location.getLatitude(), location.getLongitude());
             viewUpdate(tv_noProvider, pb_location);
-            Log.e("OK",location.getLatitude()+location.getLongitude()+"");
         }
         mGps.removeUpdates(this);
+        Intent i=new Intent(this,DisplayWeather.class);
+        startActivity(i);
         finish();
     }
 
@@ -131,13 +131,13 @@ public class SplashScreen extends Activity implements LocationListener {
 
     @Override
     public void onProviderEnabled(String provider) {
-        mGps.requestLocationUpdates(mProvider,0,0,this);
-        viewUpdate(tv_noProvider,pb_location);
+        mGps.requestLocationUpdates(mProvider, 0, 0, this);
+        viewUpdate(tv_noProvider, pb_location);
 
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        viewUpdate(tv_noProvider,pb_location);
+        viewUpdate(tv_noProvider, pb_location);
     }
 }
