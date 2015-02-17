@@ -1,7 +1,0 @@
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\classes\debug
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-644f1fb9143f9421813b635a264cb7aa256453b7.jar
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\classes-e5e4f931db4fdd08875772ba78cb9dc52a981c8c.jar
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\classes-a9f0bcc8b840b0c07f391182b3d9844aff0fdec0.jar
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-96b73be9326ee073cab4775d4edd01eacd51001e.jar
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\classes-af162d121ee5bfbc9eb610973edbc35a00fb38d4.jar
-D:\Documents\GitHub\RecyclerView\Application\build\intermediates\pre-dexed\debug\classes-442647e4e1d098ad7db1613a60141532eb7a11df.jar
