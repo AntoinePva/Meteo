@@ -1,54 +1,71 @@
 package izi.meteo.Data;
 
-import android.content.Context;
-import android.os.AsyncTask;
+import android.app.Application;
 import android.util.Log;
-import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Antoine on 04/02/2015.
+ * Created by matthieu on 06/02/2015.
  */
-public class DataController extends AsyncTask<Void, Void, Void> {
-    private Context mContext;
+public class DataController extends Application{
 
-    public DataController(Context context) {
-        mContext = context;
+    private DataModel currentLocation;
+    public static ArrayList<DataModel> listLocation;
+    private String syncLocation;
+
+
+    public static ArrayList<DataModel> getListLocation() {
+        return listLocation;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-
-    }
-
-    @Override
-
-    protected Void doInBackground(Void... params) {
+    public DataModel findLocation(String name) {
+        try {
+            this.syncLocation = new DataAsync().execute(name, Option.FIND.toString()).get();
+            return fillDataModel(this.syncLocation);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    @Override
 
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    private DataModel fillDataModel(String data) {
+        try {
+            JSONObject jObj = new JSONObject(data);
+            DataModel newModel = new DataModel();
+            newModel.setName(getString("name", jObj));
+            return newModel;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
+    private static JSONObject getObject(String tagName, JSONObject jObj) throws JSONException {
+        JSONObject subObj = jObj.getJSONObject(tagName);
+        return subObj;
+    }
+
+    private static String getString(String tagName, JSONObject jObj) throws JSONException {
+        return jObj.getString(tagName);
+    }
+
+    private static float getFloat(String tagName, JSONObject jObj) throws JSONException {
+        return (float) jObj.getDouble(tagName);
+    }
+
+    private static int getInt(String tagName, JSONObject jObj) throws JSONException {
+        return jObj.getInt(tagName);
     }
 
 }
+

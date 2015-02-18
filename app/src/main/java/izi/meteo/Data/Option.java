@@ -6,6 +6,10 @@ package izi.meteo.Data;
 public enum Option {
     FIND("FIND"),
     SEARCH("SEARCH");
-    private String  name;
-    Option(String name){this.name=name;}
+
+    private String name;
+
+    Option(String name) {
+        this.name = name;
+    }
 }

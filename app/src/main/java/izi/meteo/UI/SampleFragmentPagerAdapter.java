@@ -1,4 +1,4 @@
-package izi.meteo.menu;
+package izi.meteo.UI;
 
 
 import android.support.v4.app.Fragment;
